@@ -328,7 +328,7 @@ data "aws_iam_policy_document" "enable_cross_account_admin_0" {
         principals {
             type        = "AWS"
             identifiers = [ 
-                "${var.account_master}"
+                "${var.cross_account_arn}"
             ]
         }
     }
@@ -383,7 +383,7 @@ data "aws_iam_policy_document" "enable_cross_account_billing_0" {
         principals  {
             type        = "AWS"
             identifiers = [ 
-                "${var.account_master}"
+                "${var.cross_account_arn}"
             ]
         }
     }
