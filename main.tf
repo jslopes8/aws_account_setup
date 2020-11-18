@@ -912,7 +912,7 @@ data "aws_iam_policy_document" "control_tower" {
         principals {
             type        = "AWS"
             identifiers = [ 
-                "${var.account_master}"
+                "${var.account_master_control_tower}"
             ]
         }
     }
@@ -922,4 +922,113 @@ resource "aws_iam_role_policy_attachment" "control_tower" {
 
     role       = aws_iam_role.control_tower.0.id
     policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
+}
+
+#####################################
+#                                   #
+# Compasso UOL Baseline             #
+# Set conforme Pack                 #
+#                                   #
+#####################################
+
+resource "aws_config_config_rule" "volume_inuse" {
+    count = var.set_guardrails_detection || var.check_ec2_volume_inuse ? 1 : 0
+
+    name = "Compasso-Baseline-EC2VolumeInUseCheck"
+    description = "A Config rule that checks whether EBS volumes are attached to EC2 instances. Optionally checks if EBS volumes are marked for deletion when an instance is terminated."
+
+    source {
+        owner = "AWS"
+        source_identifier = "EC2_VOLUME_INUSE_CHECK"
+    }
+    scope {
+        compliance_resource_types = ["AWS::EC2::Volume"]
+    }
+}
+
+resource "aws_config_config_rule" "eip_attached" {
+    count = var.set_guardrails_detection || var.check_eip_attached ? 1 : 0
+
+    name = "Compasso-Baseline-EIPAttached"
+    description = "A Config rule that checks whether all Elastic IP addresses that are allocated to a VPC are attached to EC2 instances or in-use elastic network interfaces (ENIs)."
+
+    source {
+        owner = "AWS"
+        source_identifier = "EIP_ATTACHED"
+    }
+    scope {
+        compliance_resource_types = ["AWS::EC2::EIP"]
+    }
+}
+resource "aws_config_config_rule" "sg_open_only-to-authorized" {
+    count = var.set_guardrails_detection || var.check_sg_open_only_authorized_ports ? 1 : 0
+
+    name = "Compasso-Baseline-SecurityGroup-OnlyAuthorizedPorts"
+    description = "A Config rule that checks whether the security group with 0.0.0.0/0 of any Amazon Virtual Private Cloud (Amazon VPCs) allows only specific inbound TCP or UDP traffic. The rule and any security group with inbound 0.0.0.0/0. is NON_COMPLIANT, if you do n..."
+
+    source {
+        owner = "AWS"
+        source_identifier = "VPC_SG_OPEN_ONLY_TO_AUTHORIZED_PORTS"
+    }
+    scope {
+        compliance_resource_types = ["AWS::EC2::SecurityGroup"]
+    }
+}
+resource "aws_config_config_rule" "iam_user_mfa" {
+    count = var.set_guardrails_detection || var.check_iam_user_mfa_enabled ? 1 : 0
+
+    name = "Compasso-Baseline-IAMUser-MFA-Enabled"
+    description = "A config rule that checks whether the AWS Identity and Access Management users have multi-factor authentication (MFA) enabled."
+
+    source {
+        owner = "AWS"
+        source_identifier = "IAM_USER_MFA_ENABLED"
+    }
+    scope {
+        compliance_resource_types = []
+    }
+}
+resource "aws_config_config_rule" "root_mfa" {
+    count = var.set_guardrails_detection || var.check_root_mfa_enabled ? 1 : 0
+
+    name = "Compasso-Baseline-RootAccount-MFA-Enabled"
+    description = "A Config rule that checks whether users of your AWS account require a multi-factor authentication (MFA) device to sign in with root credentials."
+
+    source {
+        owner = "AWS"
+        source_identifier = "ROOT_ACCOUNT_MFA_ENABLED"
+    }
+    scope {
+        compliance_resource_types = []
+    }
+}
+resource "aws_config_config_rule" "access_keys_rotated" {
+    count = var.set_guardrails_detection || var.check_access_keys_rotated ? 1 : 0
+
+    name = "Compasso-Baseline-AccessKeys-Rotated"
+    description = "A config rule that checks whether the active access keys are rotated within the number of days specified in maxAccessKeyAge. The rule is NON_COMPLIANT if the access keys have not been rotated for more than maxAccessKeyAge number of days."
+    input_parameters = "{\"maxAccessKeyAge\":\"90\"}"
+
+    source {
+        owner = "AWS"
+        source_identifier = "ACCESS_KEYS_ROTATED"
+    }
+    scope {
+        compliance_resource_types = []
+    }
+}
+resource "aws_config_config_rule" "iam_password_policy" {
+    count = var.set_guardrails_detection || var.check_iam_password_policy ? 1 : 0
+
+    name = "Compasso-Baseline-IAM-Password-Policy"
+    description = "A Config rule that checks whether the account password policy for IAM users meets the specified requirements."
+    input_parameters = "{\"RequireUppercaseCharacters\":\"true\",\"RequireLowercaseCharacters\":\"true\",\"RequireSymbols\":\"true\",\"RequireNumbers\":\"true\",\"MinimumPasswordLength\":\"14\",\"PasswordReusePrevention\":\"24\",\"MaxPasswordAge\":\"90\"}"
+
+    source {
+        owner = "AWS"
+        source_identifier = "IAM_PASSWORD_POLICY"
+    }
+    scope {
+        compliance_resource_types = []
+    }
 }

@@ -5,6 +5,10 @@ variable "create" {
 variable "account_master" {
     type    = string
 }
+variable "account_master_control_tower" {
+    type    = string
+    default = null
+}
 variable "account_alias" {
     type    = string
     default = null
@@ -61,3 +65,20 @@ variable "set_permission_control_tower" {
     type    = bool
     default = false
 }
+variable "set_guardrails_detection" {
+    type = bool
+    default = false
+}
+variable "check_ec2_volume_inuse" {
+    type = bool
+    default = false
+}
+variable "check_eip_attached" {
+    type = bool
+    default = false
+}
+variable "check_sg_open_only_authorized_ports" {
+    type = bool
+    default = false
+}
+
