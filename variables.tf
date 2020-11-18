@@ -5,7 +5,7 @@ variable "create" {
 variable "account_master" {
     type    = string
 }
-variable "account_master_control_tower" {
+variable "cross_account_arn" {
     type    = string
     default = null
 }
@@ -81,4 +81,19 @@ variable "check_sg_open_only_authorized_ports" {
     type = bool
     default = false
 }
-
+variable "check_iam_password_policy" {
+    type = bool
+    default = false
+}
+variable "check_iam_user_mfa_enabled" {
+    type = bool
+    default = false
+}
+variable "check_root_mfa_enabled" {
+    type = bool
+    default = false
+}
+variable "check_access_keys_rotated" {
+    type = bool
+    default = false
+}
