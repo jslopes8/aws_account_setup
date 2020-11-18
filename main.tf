@@ -912,7 +912,7 @@ data "aws_iam_policy_document" "control_tower" {
         principals {
             type        = "AWS"
             identifiers = [ 
-                "${var.account_master_control_tower}"
+                "${var.account_master}"
             ]
         }
     }

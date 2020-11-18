@@ -29,7 +29,6 @@ module "compasso_baseline" {
     iam_group_name  = "Admin"
 
     set_permission_control_tower = "true"
-    account_master_control_tower = "111111111111"
 
     enable_mfa              = "false"
     enable_cloudtrail       = "true"
@@ -37,6 +36,7 @@ module "compasso_baseline" {
 
     enable_cross_account_admin      = "true"
     enable_cross_account_billing    = "true"
+    cross_account_arn               = "arn:aws:iam::01010101010101:root"
 
     enable_cloudhealth  = "true"
     account_id  = "45454545454"
