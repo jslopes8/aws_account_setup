@@ -23,12 +23,13 @@ Example of use Complete: Enabled CloudTrail, Set Permission Control Tower, adjus
 module "compasso_baseline" {
     source = "git@gitlab.uoldiveo.intranet:ump/aws_compasso_baseline.git?ref=v0.1"
 
-    account_master  = "arn:aws:iam::471784020190:root"
+    account_master  = "arn:aws:iam::00000000000:root"
 
     account_alias   = "test-baseline"
     iam_group_name  = "Admin"
 
     set_permission_control_tower = "true"
+    account_master_control_tower = "111111111111"
 
     enable_mfa              = "false"
     enable_cloudtrail       = "true"
@@ -38,8 +39,8 @@ module "compasso_baseline" {
     enable_cross_account_billing    = "true"
 
     enable_cloudhealth  = "true"
-    account_id  = "454464851268"
-    external_id = "8745c229b2d2f7e2d0b6444b0d390f"
+    account_id  = "45454545454"
+    external_id = "iuywertiuwertoiuwytoiwuerytoiuwet"
 
     is_account_catho    = "true"
 
