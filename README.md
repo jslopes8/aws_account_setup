@@ -29,6 +29,7 @@ module "compasso_baseline" {
     iam_group_name  = "Admin"
 
     set_permission_control_tower = "true"
+    set_guardrails_detection    = "true"
 
     enable_mfa              = "false"
     enable_cloudtrail       = "true"
