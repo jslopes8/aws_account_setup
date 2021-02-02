@@ -76,6 +76,7 @@ module "compasso_baseline" {
 | enable_mfa | Limits the user to manage only themselves and no other resources are allowed until he sets up MFA | `no` | `bool` | `false` |
 | set_permission_control_tower | Allows AWS Control Tower to manage your individual accounts and report information about them to your audit and logging accounts. | `no` | `bool` | `false` |
 | is_account_catho | Creates a bucket with permission for another third party account to access the CUR. | `no` | `bool` | `false` |
+| set_guardrails_detection | creates a series of config rules based on the conformance pack. | `no` | `bool` | `false` |
 
 
 
