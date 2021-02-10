@@ -6,6 +6,7 @@ The code will provide the following features on AWS.
 * [IAM Account Password Policy](https://www.terraform.io/docs/providers/aws/r/iam_account_password_policy.html)
 * [CloudTrail](https://www.terraform.io/docs/providers/aws/r/cloudtrail.html)
 * [IAM Policy Document](https://www.terraform.io/docs/providers/aws/d/iam_policy_document.html)
+* [Config Rule](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule)
 
 
 This template will perform setup on a new aws account, adjusting:
@@ -14,6 +15,8 @@ This template will perform setup on a new aws account, adjusting:
 - Account Setting Password Policy
 - Enabled CloudTrail
 - Enable MFA
+- Setting Permission Control Tower
+- Apply Conformance Pack (Control Tower Guardrails Detective)
 - Is Account Catho (set up s3 bucket for cloud8)
 
 ## Usage
@@ -28,7 +31,9 @@ module "compasso_baseline" {
     account_alias   = "test-baseline"
     iam_group_name  = "Admin"
 
-    set_permission_control_tower = "true"
+    # Control Tower
+    set_permission_control_tower    = "true"
+    set_guardrails_detection        = "true"
 
     enable_mfa              = "false"
     enable_cloudtrail       = "true"
@@ -76,10 +81,17 @@ module "compasso_baseline" {
 | enable_mfa | Limits the user to manage only themselves and no other resources are allowed until he sets up MFA | `no` | `bool` | `false` |
 | set_permission_control_tower | Allows AWS Control Tower to manage your individual accounts and report information about them to your audit and logging accounts. | `no` | `bool` | `false` |
 | is_account_catho | Creates a bucket with permission for another third party account to access the CUR. | `no` | `bool` | `false` |
-
+| set_guardrails_detection | Apply Conformance Pack, Detective Guardrails | `no` | `bool` | `false` |
 
 
 ## Variable Outputs
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 | Name | Description |
 | ---- | ----------- |
+| account_alias | Account alias creted. |
+| group_name | The group name created. |
+| group_arn | The ARN of the group name created. |
+| cloudtrail | The block with definition of cloudtrail. |
+| role_admin | The name of the role cross account admin. |
+| role_billing | The name of the role cross account billing. |
+| cloudhealth | The ARN of cloudhealth created. |

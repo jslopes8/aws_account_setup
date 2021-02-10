@@ -89,6 +89,10 @@ variable "check_iam_user_mfa_enabled" {
     type = bool
     default = false
 }
+variable "check_iam_user_console_mfa_enabled" {
+    type = bool
+    default = false
+}
 variable "check_root_mfa_enabled" {
     type = bool
     default = false
@@ -96,4 +100,40 @@ variable "check_root_mfa_enabled" {
 variable "check_access_keys_rotated" {
     type = bool
     default = false
+}
+variable "check_ebs_optimized_instance" {
+  type = bool
+  default = false
+}
+variable "check_rds_public_access" {
+  type = bool
+  default = false
+}
+variable "check_rds_public_snapshots" {
+  type = bool
+  default = false
+}
+variable "check_rds_storage_encryption" {
+  type = bool
+  default = false
+}
+variable "check_restricted_common_ports_policy" {
+  type = bool
+  default = false
+}
+variable "check_restricted_ssh_policy" {
+  type = bool
+  default = false
+}
+variable "check_s3_bucket_public_write" {
+  type = bool
+  default = false
+}
+variable "check_s3_bucket_versioning_enabled" {
+  type = bool
+  default = false
+}
+variable "check_s3_bucket_public_read" {
+  type = bool
+  default = false
 }
