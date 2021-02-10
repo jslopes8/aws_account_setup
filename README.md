@@ -31,9 +31,14 @@ module "compasso_baseline" {
     account_alias   = "test-baseline"
     iam_group_name  = "Admin"
 
+<<<<<<< HEAD
     # Control Tower
     set_permission_control_tower    = "true"
     set_guardrails_detection        = "true"
+=======
+    set_permission_control_tower = "true"
+    set_guardrails_detection    = "true"
+>>>>>>> d0dd2e3683d086c41f3948516530cfbe51190ee5
 
     enable_mfa              = "false"
     enable_cloudtrail       = "true"
@@ -81,7 +86,7 @@ module "compasso_baseline" {
 | enable_mfa | Limits the user to manage only themselves and no other resources are allowed until he sets up MFA | `no` | `bool` | `false` |
 | set_permission_control_tower | Allows AWS Control Tower to manage your individual accounts and report information about them to your audit and logging accounts. | `no` | `bool` | `false` |
 | is_account_catho | Creates a bucket with permission for another third party account to access the CUR. | `no` | `bool` | `false` |
-| set_guardrails_detection | Apply Conformance Pack, Detective Guardrails | `no` | `bool` | `false` |
+| set_guardrails_detection | creates a series of config rules based on the conformance pack. | `no` | `bool` | `false` |
 
 
 ## Variable Outputs
