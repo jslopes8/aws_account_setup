@@ -31,14 +31,9 @@ module "compasso_baseline" {
     account_alias   = "test-baseline"
     iam_group_name  = "Admin"
 
-<<<<<<< HEAD
     # Control Tower
     set_permission_control_tower    = "true"
     set_guardrails_detection        = "true"
-=======
-    set_permission_control_tower = "true"
-    set_guardrails_detection    = "true"
->>>>>>> d0dd2e3683d086c41f3948516530cfbe51190ee5
 
     enable_mfa              = "false"
     enable_cloudtrail       = "true"
