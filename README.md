@@ -47,8 +47,6 @@ module "ct_baseline" {
     account_id  = "45454545454"
     external_id = "iuywertiuwertoiuwytoiwuerytoiuwet"
 
-    is_account_catho    = "true"
-
     account_password_policy = [
         {
             minimum_password_length         = "8"
