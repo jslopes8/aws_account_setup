@@ -23,7 +23,7 @@ This template will perform setup on a new aws account, adjusting:
 Example of use Complete: Enabled CloudTrail, Set Permission Control Tower, adjusting password policy and account alias.
 
 ```hcl
-module "compasso_baseline" {
+module "ct_baseline" {
     source = "git@gitlab.uoldiveo.intranet:ump/aws_compasso_baseline.git?ref=v0.1"
 
     account_master  = "arn:aws:iam::00000000000:root"
