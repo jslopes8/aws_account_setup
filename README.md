@@ -17,7 +17,6 @@ This template will perform setup on a new aws account, adjusting:
 - Enable MFA
 - Setting Permission Control Tower
 - Apply Conformance Pack (Control Tower Guardrails Detective)
-- Is Account Catho (set up s3 bucket for cloud8)
 
 ## Usage
 Example of use Complete: Enabled CloudTrail, Set Permission Control Tower, adjusting password policy and account alias.
