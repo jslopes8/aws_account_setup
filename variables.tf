@@ -137,3 +137,11 @@ variable "check_s3_bucket_public_read" {
   type = bool
   default = false
 }
+variable "sso_permission_set_name" {
+	type = list
+	default = []
+}
+variable "sso_group_name" {
+    type = list
+    default = []
+}
